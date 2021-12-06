@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Info = ({ weight, height, id, date, bmi, deleteCard }) => {
+const Info = ({ weight, height, id, date, bmi, deleteCard ,name}) => {
   const handleDelete = () => {
     deleteCard(id);
   };
@@ -14,6 +14,7 @@ const Info = ({ weight, height, id, date, bmi, deleteCard }) => {
             BMI: {bmi}
           </span>
           <div className="card-data">
+          <span data-test="name">Name: {name}</span>
             <span data-test="weight">Weight: {weight} kg</span>
             <span data-test="height">Height: {height} cm</span>
             <span data-test="date">Date: {date}</span>

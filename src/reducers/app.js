@@ -1,5 +1,6 @@
 import { SET_STATE, SET_DATA } from "../actions";
 import { getData} from '../helpers/localStorage';
+console.log(getData('data') || [])
 const initialState = {
   state:getData('data') || [],
   data:{}

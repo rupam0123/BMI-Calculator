@@ -12,10 +12,11 @@ import { setData, setState } from '../../actions';
 const App = () => {
 const state = useSelector((state)=>state.setApp.state)
 const data = useSelector((state)=>state.setApp.data)
+
  const dispatch = useDispatch();
 
   useEffect(() => {
-    storeData('data', state);
+    storeData('data',state);
     const date = state.map(obj => obj.date);
     const bmi = state.map(obj => obj.bmi);
     let newData = { date, bmi };
@@ -68,6 +69,7 @@ const data = useSelector((state)=>state.setApp.data)
                       height={info.height}
                       date={info.date}
                       bmi={info.bmi}
+                      name={info.name}
                       deleteCard={handleDelete}
                     />
                   ))}

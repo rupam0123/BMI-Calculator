@@ -4,7 +4,8 @@ const initialState ={
     data:{
       weight: '',
 	    height: '',
-    	date: ''
+    	date: '',
+      name:''
     }
 }
 
