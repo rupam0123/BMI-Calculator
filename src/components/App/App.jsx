@@ -6,18 +6,20 @@ import BmiForm from '../BmiForm/BmiForm';
 import Info from '../Info/Info';
 import Bar from '../Bar/Bar';
 import { getData, storeData } from '../../helpers/localStorage';
+import { useSelector,useDispatch } from 'react-redux';
+import { setData, setState } from '../../actions';
 
 const App = () => {
-  const initialState = () => getData('data') || [];
-  const [state, setState] = useState(initialState);
-  const [data, setData] = useState({});
+const state = useSelector((state)=>state.setApp.state)
+const data = useSelector((state)=>state.setApp.data)
+ const dispatch = useDispatch();
 
   useEffect(() => {
     storeData('data', state);
     const date = state.map(obj => obj.date);
     const bmi = state.map(obj => obj.bmi);
     let newData = { date, bmi };
-    setData(newData);
+    dispatch(setData(newData));
   }, [state]);
 
   const handleChange = val => {
@@ -27,7 +29,7 @@ const App = () => {
     let newVal = [...state, val];
     let len = newVal.length;
     if (len > 7) newVal = newVal.slice(1, len);
-    setState(newVal);
+    dispatch(setState(newVal));
   };
 
   const handleDelete = id => {
@@ -35,11 +37,11 @@ const App = () => {
     let newState = state.filter(i => {
       return i.id !== id;
     });
-    setState(newState);
+    dispatch(setState(newState));
   };
 
   const handleUndo = () => {
-    setState(getData('lastState'));
+    dispatch(setState(getData('lastState')));
   };
 
   return (

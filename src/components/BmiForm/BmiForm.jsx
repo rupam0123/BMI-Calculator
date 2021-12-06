@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import '../App/App.css';
+import { useSelector,useDispatch } from 'react-redux';
+import { setMeasureData } from '../../actions';
 
-const initialValues = {
-	weight: '',
-	height: '',
-	date: ''
-}
 
 const BmiForm = ({ change }) => {
-	const [state, setState] = useState(initialValues);
+	const state=useSelector((state)=>state.setMeasure.data)
+	const dispatch=useDispatch();
 
 	const handleChange = e => {
 		let { value, name } = e.target;
@@ -17,16 +15,13 @@ const BmiForm = ({ change }) => {
 			value = 999;
 		}
 		const date = new Date().toLocaleString().split(',')[0];
-		setState({
-			...state,
-			[name]: value,
-			date
-		});
+		const measure = { ...state, [name]: value, date};
+		dispatch(setMeasureData(measure))
 	};
 
 	const handleSubmit = () => {
 		change(state);
-		setState(initialValues);
+
 	};
 
 	return (
